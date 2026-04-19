@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Package, Globe, FileText, Users, BookOpen,
   ChevronDown, ChevronUp, Download, ShieldCheck,
-  Zap, AlertTriangle, Lock, Star, ArrowRight, Menu, X
+  Zap, AlertTriangle, Lock, Star, ArrowRight, Phone, Mail, Quote
 } from "lucide-react";
 
 // ─── CONFIG — edit all content here ───────────────────────────────────────────
@@ -11,8 +11,10 @@ const CONFIG = {
     name: "ExportVault",
     tld: ".in",
     tagline: "India's #1 Export Intelligence Kit",
-    contact: "support@exportvault.in",
-    gst: "GST No: 27XXXXX0000X1ZX",
+    contact: "exportvault01@gmail.com",
+    phone: "+91 8490843887",
+    gst: "GST No: 24TEKPS2323F1Z6",
+    company: "Elyt Overseas",
   },
   hero: {
     badge: "🇮🇳 Trusted by 2,000+ Indian Exporters",
@@ -24,9 +26,9 @@ const CONFIG = {
     cta: "Get Instant Access →",
     subCta: "Instant Download · GST Invoice Included",
   },
+  buyUrl: "https://rzp.io/rzp/goldendata",
   problem: {
     title: "Sound familiar?",
-    subtitle: "Finding reliable export data shouldn't cost you lakhs or weeks of research.",
     points: [
       { icon: AlertTriangle, text: "Paid ₹5,000+ for outdated importer lists that went nowhere" },
       { icon: AlertTriangle, text: "Spent weeks Googling HSN codes and got conflicting answers" },
@@ -72,6 +74,40 @@ const CONFIG = {
     { icon: Zap, label: "Always Updated", sub: "Refreshed every quarter" },
     { icon: Lock, label: "Secure Payment", sub: "Razorpay encrypted checkout" },
   ],
+  reviews: [
+    {
+      name: "Rajesh Mehta",
+      role: "Textile Exporter, Surat",
+      stars: 5,
+      text: "The importer list for UAE alone was worth 10x the price. Within 3 weeks of using these contacts, I had my first confirmed order from Dubai. This toolkit is the real deal.",
+      initials: "RM",
+      color: "#1E3A6A",
+    },
+    {
+      name: "Priya Nair",
+      role: "Spices & Agri Export, Kochi",
+      stars: 5,
+      text: "I was confused about HSN codes for months. The guide cleared everything up in an afternoon. Saved me from a potential customs penalty. Absolutely worth every rupee.",
+      initials: "PN",
+      color: "#2D1E5A",
+    },
+    {
+      name: "Amandeep Singh",
+      role: "Engineering Goods, Ludhiana",
+      stars: 5,
+      text: "Found a CHA in Mundra within 10 minutes using the directory. Previously I wasted 2 weeks calling random agents. The documentation templates alone saved our first shipment.",
+      initials: "AS",
+      color: "#1E3A2A",
+    },
+    {
+      name: "Sunita Agarwal",
+      role: "Handicrafts Exporter, Jaipur",
+      stars: 5,
+      text: "As a first-time exporter, I had no idea where to start. The step-by-step documentation guide walked me through every form and process. I wish I had this two years ago.",
+      initials: "SA",
+      color: "#3A1E1E",
+    },
+  ],
   faqs: [
     {
       q: "What format are the files in?",
@@ -82,6 +118,10 @@ const CONFIG = {
       a: "Completely one-time. Pay ₹499 once and the files are yours forever. No recurring charges, ever.",
     },
     {
+      q: "How do I access my files after payment?",
+      a: "You are redirected to a Google Drive link immediately after successful payment on Razorpay. Access is instant — no waiting, no emails needed.",
+    },
+    {
       q: "How current is the importer data?",
       a: "We refresh all lists every quarter. Your download always reflects the latest version available at time of purchase.",
     },
@@ -90,11 +130,32 @@ const CONFIG = {
       a: "Yes. A proper GST-compliant invoice is automatically emailed to you right after purchase.",
     },
     {
-      q: "Can I use this for my business or agency?",
-      a: "The ₹499 license covers a single business entity. For agencies serving multiple clients, contact us for a team license.",
+      q: "Can I share or resell this data?",
+      a: "No. This is a single-user license for your internal business use only. Redistribution is strictly prohibited per our Terms & Conditions.",
     },
   ],
-  buyUrl: "#buy",
+  tnc: [
+    {
+      title: "Non-Transferable License",
+      body: "This purchase grants you a single-user license for your internal business use. Reselling, sharing, or redistributing this database is strictly prohibited and will result in legal action and a permanent ban from future updates.",
+    },
+    {
+      title: "Data Accuracy",
+      body: 'While the database is compiled from verified manufacturing and trade sources, global markets are dynamic. Elyt Overseas provides this information "as-is" and does not guarantee specific sales or business outcomes.',
+    },
+    {
+      title: "Instant Delivery",
+      body: "Access is provided via a direct Google Drive redirect immediately upon successful payment. If you face technical issues, please contact exportvault01@gmail.com.",
+    },
+    {
+      title: "No-Refund Policy",
+      body: "Due to the digital nature of this product (instant access to downloadable data), all sales are final. We follow a strict No-Refund and No-Cancellation policy.",
+    },
+    {
+      title: "Authorized Payment",
+      body: "All transactions of ₹499 are securely processed via Razorpay. Any unauthorized chargebacks will be contested based on these agreed-upon terms.",
+    },
+  ],
 };
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -110,99 +171,71 @@ const styles = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: ${navy}; color: #E8EDF5; font-family: 'DM Sans', sans-serif; }
   ::selection { background: ${gold}33; }
-  ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: ${navy}; } ::-webkit-scrollbar-thumb { background: ${navyBorder}; border-radius: 3px; }
-
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: ${navy}; }
+  ::-webkit-scrollbar-thumb { background: ${navyBorder}; border-radius: 3px; }
   .syne { font-family: 'Syne', sans-serif; }
-
   .gold { color: ${gold}; }
   .gold-grad { background: linear-gradient(135deg, ${goldLight}, ${gold}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
     background: linear-gradient(135deg, ${goldLight}, #D4920A);
     color: #0B1120; font-weight: 700; font-family: 'Syne', sans-serif;
     padding: 14px 28px; border-radius: 8px; border: none; cursor: pointer;
-    font-size: 1rem; letter-spacing: 0.01em;
+    font-size: 1rem; letter-spacing: 0.01em; text-decoration: none;
     box-shadow: 0 0 32px #F0B42940, 0 4px 16px #00000060;
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px #F0B42955, 0 8px 24px #00000070; }
   .btn-primary:active { transform: translateY(0); }
-
   .card {
-    background: ${navyCard};
-    border: 1px solid ${navyBorder};
-    border-radius: 16px;
+    background: ${navyCard}; border: 1px solid ${navyBorder}; border-radius: 16px;
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
-  .card:hover {
-    border-color: ${gold}88;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px #F0B42918;
-  }
-
+  .card:hover { border-color: ${gold}88; transform: translateY(-4px); box-shadow: 0 8px 32px #F0B42918; }
   .badge {
     display: inline-flex; align-items: center; gap: 6px;
     background: ${gold}18; border: 1px solid ${gold}44;
-    color: ${gold}; border-radius: 999px;
-    padding: 6px 16px; font-size: 0.82rem; font-weight: 600;
+    color: ${gold}; border-radius: 999px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600;
   }
-
-  .section-label {
-    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
-    text-transform: uppercase; color: ${gold};
-  }
-
+  .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: ${gold}; }
   .noise-bg {
     position: relative;
     background: radial-gradient(ellipse 80% 60% at 50% -10%, #1E3A6A55, transparent),
-                radial-gradient(ellipse 50% 40% at 80% 80%, #0F2A5022, transparent),
-                ${navy};
+                radial-gradient(ellipse 50% 40% at 80% 80%, #0F2A5022, transparent), ${navy};
   }
   .noise-bg::before {
     content: ''; position: absolute; inset: 0; opacity: 0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     pointer-events: none;
   }
-
   .divider { border: none; border-top: 1px solid ${navyBorder}; margin: 0; }
-
   .sticky-bar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
     background: ${navyMid}EE; backdrop-filter: blur(12px);
-    border-top: 1px solid ${navyBorder};
-    padding: 12px 20px;
+    border-top: 1px solid ${navyBorder}; padding: 12px 20px;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .fade-up { animation: fadeUp 0.6s ease both; }
   .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; }
   .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
-
   @media (min-width: 768px) { .sticky-bar { display: none; } }
 `;
 
 function Nav() {
-  const [open, setOpen] = useState(false);
   return (
-    <nav style={{
-      position: "sticky", top: 0, zIndex: 40,
-      background: `${navy}EE`, backdropFilter: "blur(14px)",
-      borderBottom: `1px solid ${navyBorder}`,
-    }}>
+    <nav style={{ position: "sticky", top: 0, zIndex: 40, background: `${navy}EE`, backdropFilter: "blur(14px)", borderBottom: `1px solid ${navyBorder}` }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
         <span className="syne" style={{ fontSize: "1.3rem", fontWeight: 800, color: "#fff" }}>
           Export<span style={{ color: gold }}>Vault</span>
           <span style={{ color: "#6B7E9E", fontSize: "0.9rem" }}>.in</span>
         </span>
-        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-          <a href="#features" style={{ color: "#A0AEC0", fontSize: "0.9rem", textDecoration: "none", display: open ? "block" : undefined }} className="nav-link">What's Inside</a>
-          <a href="#faq" style={{ color: "#A0AEC0", fontSize: "0.9rem", textDecoration: "none" }}>FAQ</a>
-          <a href={CONFIG.buyUrl} className="btn-primary" style={{ padding: "8px 18px", fontSize: "0.85rem" }}>Buy ₹499</a>
+        <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+          <a href="#features" style={{ color: "#A0AEC0", fontSize: "0.88rem", textDecoration: "none" }}>What's Inside</a>
+          <a href="#reviews" style={{ color: "#A0AEC0", fontSize: "0.88rem", textDecoration: "none" }}>Reviews</a>
+          <a href="#faq" style={{ color: "#A0AEC0", fontSize: "0.88rem", textDecoration: "none" }}>FAQ</a>
+          <a href={CONFIG.buyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "8px 18px", fontSize: "0.85rem" }}>Buy ₹499</a>
         </div>
       </div>
     </nav>
@@ -212,12 +245,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="noise-bg" style={{ padding: "96px 24px 80px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{
-        position: "absolute", top: "20%", left: "50%", transform: "translate(-50%,-50%)",
-        width: 600, height: 300,
-        background: `radial-gradient(ellipse, ${gold}18 0%, transparent 70%)`,
-        pointerEvents: "none",
-      }} />
+      <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, background: `radial-gradient(ellipse, ${gold}18 0%, transparent 70%)`, pointerEvents: "none" }} />
       <div style={{ maxWidth: 760, margin: "0 auto", position: "relative" }}>
         <div className="badge fade-up">{CONFIG.hero.badge}</div>
         <h1 className="syne gold-grad fade-up delay-1" style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)", fontWeight: 800, lineHeight: 1.1, margin: "24px 0 20px" }}>
@@ -232,7 +260,7 @@ function Hero() {
             <span style={{ fontSize: "1.1rem", color: "#4A5568", textDecoration: "line-through" }}>{CONFIG.hero.originalPrice}</span>
             <span style={{ background: "#16A34A22", color: "#4ADE80", border: "1px solid #4ADE8033", borderRadius: 6, padding: "2px 8px", fontSize: "0.78rem", fontWeight: 700 }}>83% OFF</span>
           </div>
-          <a href={CONFIG.buyUrl} className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>{CONFIG.hero.cta}</a>
+          <a href={CONFIG.buyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>{CONFIG.hero.cta}</a>
           <p style={{ fontSize: "0.82rem", color: "#4A5568" }}>{CONFIG.hero.subCta}</p>
         </div>
         <div className="fade-up delay-4" style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 32 }}>
@@ -254,7 +282,7 @@ function Problem() {
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
           {CONFIG.problem.points.map((p, i) => (
-            <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", background: "#0F1826", border: `1px solid #E5454522`, borderRadius: 12, padding: "18px 20px" }}>
+            <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", background: "#0F1826", border: "1px solid #E5454522", borderRadius: 12, padding: "18px 20px" }}>
               <p.icon size={20} color="#F87171" style={{ flexShrink: 0, marginTop: 2 }} />
               <p style={{ color: "#94A3B8", fontSize: "0.95rem", lineHeight: 1.6 }}>{p.text}</p>
             </div>
@@ -280,22 +308,71 @@ function Features() {
         <p style={{ textAlign: "center", color: "#64748B", marginBottom: 48, fontSize: "0.95rem" }}>Hover each card to explore what you get.</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {CONFIG.features.map((f, i) => (
-            <div
-              key={i}
-              className="card"
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              style={{ padding: "28px 24px", cursor: "default", position: "relative", overflow: "hidden" }}
-            >
-              {hovered === i && (
-                <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at top left, ${gold}10, transparent 70%)`, pointerEvents: "none" }} />
-              )}
-              <div style={{ width: 44, height: 44, borderRadius: 10, background: hovered === i ? `${gold}22` : `${navyBorder}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, transition: "background 0.2s" }}>
+            <div key={i} className="card" onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ padding: "28px 24px", cursor: "default", position: "relative", overflow: "hidden" }}>
+              {hovered === i && <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at top left, ${gold}10, transparent 70%)`, pointerEvents: "none" }} />}
+              <div style={{ width: 44, height: 44, borderRadius: 10, background: hovered === i ? `${gold}22` : navyBorder, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, transition: "background 0.2s" }}>
                 <f.icon size={22} color={hovered === i ? gold : "#6B7E9E"} style={{ transition: "color 0.2s" }} />
               </div>
               <div className="syne" style={{ fontSize: "1.05rem", fontWeight: 700, color: "#E2E8F0", marginBottom: 4 }}>{f.title}</div>
               <div style={{ fontSize: "0.78rem", color: gold, fontWeight: 600, marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.08em" }}>{f.subtitle}</div>
-              <p style={{ color: "#64748B", fontSize: "0.88rem", lineHeight: 1.65, transition: "color 0.2s", ...(hovered === i ? { color: "#94A3B8" } : {}) }}>{f.desc}</p>
+              <p style={{ color: hovered === i ? "#94A3B8" : "#64748B", fontSize: "0.88rem", lineHeight: 1.65, transition: "color 0.2s" }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Trust() {
+  return (
+    <section style={{ padding: "60px 24px", background: navyMid }}>
+      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 20 }}>
+          {CONFIG.trust.map((t, i) => (
+            <div key={i} style={{ textAlign: "center", padding: "24px 16px" }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: `${gold}15`, border: `1px solid ${gold}33`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
+                <t.icon size={22} color={gold} />
+              </div>
+              <div className="syne" style={{ fontWeight: 700, color: "#E2E8F0", marginBottom: 4 }}>{t.label}</div>
+              <div style={{ color: "#64748B", fontSize: "0.85rem" }}>{t.sub}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Reviews() {
+  return (
+    <section id="reviews" style={{ padding: "80px 24px", background: navy }}>
+      <div style={{ maxWidth: 1060, margin: "0 auto" }}>
+        <p className="section-label" style={{ textAlign: "center" }}>Real Exporters. Real Results.</p>
+        <h2 className="syne" style={{ fontSize: "clamp(1.6rem, 4vw, 2.3rem)", fontWeight: 800, textAlign: "center", margin: "12px 0 16px", color: "#E2E8F0" }}>
+          What Our Customers Say
+        </h2>
+        <div style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 48 }}>
+          {[...Array(5)].map((_, i) => <Star key={i} size={18} fill={gold} color={gold} />)}
+          <span style={{ color: "#64748B", fontSize: "0.88rem", marginLeft: 8, alignSelf: "center" }}>4.9 average · 2,000+ customers</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          {CONFIG.reviews.map((r, i) => (
+            <div key={i} className="card" style={{ padding: "28px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
+              <Quote size={22} color={`${gold}44`} />
+              <p style={{ color: "#94A3B8", fontSize: "0.92rem", lineHeight: 1.8, flex: 1, fontStyle: "italic" }}>{r.text}</p>
+              <div style={{ display: "flex", gap: 3, marginTop: 4 }}>
+                {[...Array(r.stars)].map((_, j) => <Star key={j} size={12} fill={gold} color={gold} />)}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 8, borderTop: `1px solid ${navyBorder}` }}>
+                <div style={{ width: 40, height: 40, borderRadius: "50%", background: r.color, border: `2px solid ${gold}33`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span style={{ color: gold, fontWeight: 700, fontSize: "0.8rem", fontFamily: "Syne, sans-serif" }}>{r.initials}</span>
+                </div>
+                <div>
+                  <div className="syne" style={{ fontSize: "0.9rem", fontWeight: 700, color: "#CBD5E1" }}>{r.name}</div>
+                  <div style={{ fontSize: "0.78rem", color: "#4A5568" }}>{r.role}</div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -317,7 +394,7 @@ function Pricing() {
             <span className="syne gold-grad" style={{ fontSize: "3.5rem", fontWeight: 800 }}>{CONFIG.hero.price}</span>
             <span style={{ color: "#4A5568", textDecoration: "line-through", fontSize: "1.2rem" }}>{CONFIG.hero.originalPrice}</span>
           </div>
-          <p style={{ color: "#4ADE80", fontWeight: 600, marginBottom: 28, fontSize: "0.9rem" }}>One-time payment · No subscription</p>
+          <p style={{ color: "#4ADE80", fontWeight: 600, marginBottom: 28, fontSize: "0.9rem" }}>One-time payment · No subscription ever</p>
           <div style={{ textAlign: "left", marginBottom: 28, display: "flex", flexDirection: "column", gap: 12 }}>
             {CONFIG.features.map((f, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -326,30 +403,12 @@ function Pricing() {
               </div>
             ))}
           </div>
-          <a href={CONFIG.buyUrl} className="btn-primary" style={{ width: "100%", justifyContent: "center", fontSize: "1.05rem" }}>
-            Get Instant Access <ArrowRight size={18} />
+          <a href={CONFIG.buyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center", fontSize: "1.05rem" }}>
+            Pay Securely via Razorpay <ArrowRight size={18} />
           </a>
-          <p style={{ marginTop: 14, color: "#475569", fontSize: "0.8rem" }}>GST Invoice · Instant Download · Razorpay Secure</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Trust() {
-  return (
-    <section style={{ padding: "60px 24px", background: navy }}>
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 20 }}>
-          {CONFIG.trust.map((t, i) => (
-            <div key={i} style={{ textAlign: "center", padding: "24px 16px" }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: `${gold}15`, border: `1px solid ${gold}33`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
-                <t.icon size={22} color={gold} />
-              </div>
-              <div className="syne" style={{ fontWeight: 700, color: "#E2E8F0", marginBottom: 4 }}>{t.label}</div>
-              <div style={{ color: "#64748B", fontSize: "0.85rem" }}>{t.sub}</div>
-            </div>
-          ))}
+          <p style={{ marginTop: 14, color: "#475569", fontSize: "0.8rem" }}>
+            GST Invoice · Instant Google Drive Access · Razorpay Secure
+          </p>
         </div>
       </div>
     </section>
@@ -359,7 +418,7 @@ function Trust() {
 function FAQ() {
   const [open, setOpen] = useState(null);
   return (
-    <section id="faq" style={{ padding: "80px 24px", background: navyMid }}>
+    <section id="faq" style={{ padding: "80px 24px", background: navy }}>
       <div style={{ maxWidth: 700, margin: "0 auto" }}>
         <p className="section-label" style={{ textAlign: "center" }}>FAQ</p>
         <h2 className="syne" style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)", fontWeight: 800, textAlign: "center", margin: "12px 0 40px", color: "#E2E8F0" }}>
@@ -368,16 +427,11 @@ function FAQ() {
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {CONFIG.faqs.map((faq, i) => (
             <div key={i} style={{ background: navyCard, border: `1px solid ${open === i ? gold + "44" : navyBorder}`, borderRadius: 12, overflow: "hidden", transition: "border-color 0.2s" }}>
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 22px", background: "none", border: "none", cursor: "pointer", color: "#CBD5E1", fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, textAlign: "left", gap: 12 }}
-              >
+              <button onClick={() => setOpen(open === i ? null : i)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 22px", background: "none", border: "none", cursor: "pointer", color: "#CBD5E1", fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, textAlign: "left", gap: 12 }}>
                 <span>{faq.q}</span>
                 {open === i ? <ChevronUp size={18} color={gold} /> : <ChevronDown size={18} color="#4A5568" />}
               </button>
-              {open === i && (
-                <div style={{ padding: "0 22px 18px", color: "#64748B", fontSize: "0.9rem", lineHeight: 1.7 }}>{faq.a}</div>
-              )}
+              {open === i && <div style={{ padding: "0 22px 18px", color: "#64748B", fontSize: "0.9rem", lineHeight: 1.7 }}>{faq.a}</div>}
             </div>
           ))}
         </div>
@@ -386,22 +440,78 @@ function FAQ() {
   );
 }
 
+function TnC() {
+  const [open, setOpen] = useState(null);
+  return (
+    <section id="tnc" style={{ padding: "80px 24px", background: navyMid }}>
+      <div style={{ maxWidth: 700, margin: "0 auto" }}>
+        <p className="section-label" style={{ textAlign: "center" }}>Legal</p>
+        <h2 className="syne" style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)", fontWeight: 800, textAlign: "center", margin: "12px 0 8px", color: "#E2E8F0" }}>
+          Terms &amp; Conditions
+        </h2>
+        <p style={{ textAlign: "center", color: "#475569", fontSize: "0.85rem", marginBottom: 36 }}>
+          By purchasing the Export Vault, you agree to the following terms.
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {CONFIG.tnc.map((item, i) => (
+            <div key={i} style={{ background: navyCard, border: `1px solid ${open === i ? gold + "33" : navyBorder}`, borderRadius: 12, overflow: "hidden", transition: "border-color 0.2s" }}>
+              <button onClick={() => setOpen(open === i ? null : i)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", background: "none", border: "none", cursor: "pointer", gap: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ color: gold, fontSize: "0.72rem", fontWeight: 700, background: `${gold}18`, border: `1px solid ${gold}33`, borderRadius: 4, padding: "2px 7px", flexShrink: 0, fontFamily: "Syne, sans-serif" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <span style={{ color: "#CBD5E1", fontFamily: "'DM Sans', sans-serif", fontSize: "0.93rem", fontWeight: 600, textAlign: "left" }}>{item.title}</span>
+                </div>
+                {open === i ? <ChevronUp size={16} color={gold} style={{ flexShrink: 0 }} /> : <ChevronDown size={16} color="#4A5568" style={{ flexShrink: 0 }} />}
+              </button>
+              {open === i && <div style={{ padding: "0 20px 16px 20px", color: "#64748B", fontSize: "0.88rem", lineHeight: 1.75 }}>{item.body}</div>}
+            </div>
+          ))}
+        </div>
+        <p style={{ marginTop: 20, textAlign: "center", color: "#2D3748", fontSize: "0.78rem" }}>
+          Governed by the laws of India. Disputes subject to jurisdiction of Gujarat courts.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
-    <footer style={{ background: "#070D18", borderTop: `1px solid ${navyBorder}`, padding: "40px 24px" }}>
-      <div style={{ maxWidth: 1060, margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-        <div>
-          <div className="syne" style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", marginBottom: 4 }}>
-            Export<span style={{ color: gold }}>Vault</span><span style={{ color: "#4A5568" }}>.in</span>
+    <footer style={{ background: "#070D18", borderTop: `1px solid ${navyBorder}`, padding: "48px 24px 32px" }}>
+      <div style={{ maxWidth: 1060, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32, marginBottom: 32 }}>
+          <div>
+            <div className="syne" style={{ fontSize: "1.2rem", fontWeight: 800, color: "#fff", marginBottom: 8 }}>
+              Export<span style={{ color: gold }}>Vault</span><span style={{ color: "#4A5568" }}>.in</span>
+            </div>
+            <p style={{ color: "#475569", fontSize: "0.82rem", lineHeight: 1.6 }}>
+              India's most affordable export intelligence toolkit.<br />By {CONFIG.brand.company}.
+            </p>
           </div>
-          <p style={{ color: "#475569", fontSize: "0.8rem" }}>{CONFIG.brand.gst}</p>
+          <div>
+            <p className="syne" style={{ fontSize: "0.85rem", fontWeight: 700, color: "#64748B", marginBottom: 12 }}>Quick Links</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {[["#features", "What's Inside"], ["#reviews", "Reviews"], ["#faq", "FAQ"], ["#tnc", "Terms & Conditions"]].map(([href, label]) => (
+                <a key={href} href={href} style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none" }}>{label}</a>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="syne" style={{ fontSize: "0.85rem", fontWeight: 700, color: "#64748B", marginBottom: 12 }}>Contact Us</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <a href={`mailto:${CONFIG.brand.contact}`} style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
+                <Mail size={14} color="#475569" />{CONFIG.brand.contact}
+              </a>
+              <a href={`tel:${CONFIG.brand.phone.replace(/\s/g, "")}`} style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
+                <Phone size={14} color="#475569" />{CONFIG.brand.phone}
+              </a>
+              <p style={{ color: "#2D3748", fontSize: "0.78rem", marginTop: 4 }}>{CONFIG.brand.gst}</p>
+            </div>
+          </div>
         </div>
-        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-          <a href="#features" style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none" }}>What's Inside</a>
-          <a href="#faq" style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none" }}>FAQ</a>
-          <a href={`mailto:${CONFIG.brand.contact}`} style={{ color: "#475569", fontSize: "0.85rem", textDecoration: "none" }}>{CONFIG.brand.contact}</a>
+        <div style={{ borderTop: `1px solid ${navyBorder}`, paddingTop: 20, display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 8 }}>
+          <p style={{ color: "#2D3748", fontSize: "0.78rem" }}>© {new Date().getFullYear()} ExportVault.in · All rights reserved · {CONFIG.brand.company}</p>
+          <a href="#tnc" style={{ color: "#2D3748", fontSize: "0.78rem", textDecoration: "none" }}>Terms & Conditions</a>
         </div>
-        <p style={{ color: "#2D3748", fontSize: "0.78rem" }}>© {new Date().getFullYear()} ExportVault.in · All rights reserved</p>
       </div>
     </footer>
   );
@@ -414,7 +524,7 @@ function StickyBar() {
         <div className="syne" style={{ fontWeight: 700, color: "#E2E8F0", fontSize: "0.95rem" }}>Exporter's Toolkit</div>
         <div style={{ color: "#64748B", fontSize: "0.78rem" }}>Instant Download · GST Invoice</div>
       </div>
-      <a href={CONFIG.buyUrl} className="btn-primary" style={{ padding: "10px 20px", fontSize: "0.9rem", whiteSpace: "nowrap" }}>
+      <a href={CONFIG.buyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "10px 20px", fontSize: "0.9rem", whiteSpace: "nowrap" }}>
         Buy Now · {CONFIG.hero.price}
       </a>
     </div>
@@ -435,9 +545,13 @@ export default function ExportVault() {
         <hr className="divider" />
         <Trust />
         <hr className="divider" />
+        <Reviews />
+        <hr className="divider" />
         <Pricing />
         <hr className="divider" />
         <FAQ />
+        <hr className="divider" />
+        <TnC />
       </main>
       <Footer />
       <StickyBar />
